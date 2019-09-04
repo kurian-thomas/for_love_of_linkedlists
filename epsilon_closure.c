@@ -12,6 +12,7 @@ struct node{
 struct node *transition[20][1]={NULL};
 char closure[100]="";
 int nostates;
+static int pr;
 void insert(int,int);
 void findclosure(int);
 void display();
@@ -44,6 +45,7 @@ int main(){
 
     for(i=1;i<=nostates;i++){
 
+        pr=i;
         printf("\n q%d:{",i);
         findclosure(i);
         printf("%s",closure);
@@ -85,6 +87,9 @@ void findclosure(int i){
     pre=temp;
     while(temp!=NULL){
 
+        if(pr==temp->st){
+            return ;
+        }
         findclosure(temp->st);
         pre=temp;
         temp=temp->link;
